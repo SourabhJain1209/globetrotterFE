@@ -1,0 +1,17 @@
+<div class="world-time-container">
+    <h2 style="color: black;">🌍 World Time</h2>
+    
+    <div class="time-list">
+        <div *ngFor="let time of times" class="time-card">
+            <h3>{{ time.city }}</h3>
+            <p>{{ time.datetime }}</p>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <input type="text" [(ngModel)]="searchCity" (input)="onSearch()" placeholder="Search city..." />
+        <ul *ngIf="suggestedCities.length">
+            <li *ngFor="let city of suggestedCities" (click)="selectCity(city)">{{ city }}</li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="fact-container">
+    <button (click)="getRandomFact()" class="btn btn-primary">Show me a trivia!</button>
+    <h3 *ngIf="data">{{ data?.destination }}, {{data?.country}}</h3>
+    <ul style="background: cross-fade(); font-weight: 600;" *ngIf="data">
+        <li *ngFor="let fact of factsList">
+            {{ fact }}.
+        </li>
+    </ul>
+</div>

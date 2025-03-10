@@ -1,0 +1,36 @@
+<div class="container"  style="background-image: url('/assets/Img5.jpg');">
+    <button *ngIf="showStart" class="btn btn-primary" (click)="startGame()">
+        Start Challenge
+    </button>
+    <div class="row quiz" *ngIf="showQuiz">
+        <!-- //create a quiz here  -->
+         <div class="col-md-3"></div>
+        <div class="quiz-container col-md-6">
+            <h2>Guess the City</h2>
+            <p class="quiz-clue"><strong>Clue:</strong> {{ quizData?.clue }}</p>
+        
+            <div class="quiz-options">
+                <button *ngFor="let option of quizData?.options" 
+                        [class.correct]="selectedOption && option.isCorrect" 
+                        [class.wrong]="selectedOption && !option.isCorrect && option === selectedOption"
+                        (click)="checkAnswer(option)">
+                    {{ option.option }}
+                </button>
+            </div>
+        
+            <div *ngIf="selectedOption">
+                <p *ngIf="selectedOption.isCorrect" class="correct-msg">✅ Correct!</p>
+                <p *ngIf="!selectedOption.isCorrect" class="wrong-msg">❌ Wrong! Try again.</p>
+                <button (click)="startGame()">Next Question</button>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row.stats" *ngIf="showStats">
+        <h3>{{challengerName}}:{{challengerScore}} V/S {{username}}:{{score}}</h3>
+        <h2>
+            {{challengeMessage}}
+        </h2>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="weather-container">
+    <h2>Check Weather</h2>
+    <h6>Enter the name of a city:</h6>
+    <small>Example: Mumbai, New York, London</small><br />
+  
+    <input
+      type="text"
+      placeholder="Enter city name"
+      [(ngModel)]="city"
+      (input)="onSearchChange()"
+    />
+  
+    <p *ngIf="loading" class="loading">Fetching weather data...</p>
+    <p *ngIf="error" class="error-message">{{ error }}</p>
+  
+    <div *ngIf="weather" class="weather-info">
+      <h2>{{ weather.city }}, {{ weather.country }}</h2>
+      <img [src]="weather.icon" alt="Weather icon" />
+      <p>{{ weather.description }}</p>
+      <p>Temperature: {{ weather.temperature }}°C</p>
+      <p>Humidity: {{ weather.humidity }}%</p>
+    </div>
+  </div>
+  

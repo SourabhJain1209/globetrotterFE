@@ -1,0 +1,91 @@
+<div class="play-game-container" style="background-image: url('/assets/Img5.jpg');">
+    
+    <button *ngIf="showLetsplay" class="btn btn-primary playAGameAsk" style="top: 50px;" (click)="letsPlayAGame()">
+        Let's play a Game
+    </button>
+    <span *ngIf="message" style="font-size: 16px; color: red;">
+        Please try a diffrent Username
+    </span>
+    <input type="text" *ngIf="showInput" class="form-control" [(ngModel)]="username" placeholder="Enter username"/>
+    <button *ngIf="showInput" class="btn btn-primary" (click)="PlayGame()">
+        Play
+    </button>
+
+    <div class="row quiz" *ngIf="showQuiz">
+        <!-- //create a quiz here  -->
+        <div class="quiz-container">
+            <h2>Guess the City</h2>
+            <p class="quiz-clue"><strong>Clue:</strong> {{ quizData?.clue }}</p>
+        
+            <div class="quiz-options">
+                <button *ngFor="let option of quizData?.options" 
+                        [class.correct]="selectedOption && option.isCorrect" 
+                        [class.wrong]="selectedOption && !option.isCorrect && option === selectedOption"
+                        (click)="checkAnswer(option)">
+                    {{ option.option }}
+                </button>
+            </div>
+        
+            <div *ngIf="selectedOption">
+                <p *ngIf="selectedOption.isCorrect" class="correct-msg">✅ Correct!</p>
+                <p *ngIf="!selectedOption.isCorrect" class="wrong-msg">❌ Wrong! Try again.</p>
+                <button (click)="startGame()">Next Question</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="row.stats" *ngIf="showStats">
+        <h2>Hurray! 🎉</h2>
+        <h5>You are some traveller!😎</h5>
+        <div class="row">
+            <h3>Correct Answers: {{correctAnswer}}</h3><h3>Incorrect Answers: {{incorrectAnswer}}</h3>
+        </div>
+        <div class="row">
+            <h3>Score: {{score}}</h3><br>
+            <span style="font-size: small;">
+                remember you get +3 for every correct & -1 for every incorrect answer<br>
+                Happy Quizing! 😉
+            </span>
+        </div>
+        <!-- <button class="btn btn-success mt-3" (click)="openWhatsAppShare()">📤 Share on WhatsApp</button> -->
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#shareChallengeModal">
+            📤 Share on WhatsApp
+          </button>
+    </div>
+</div>
+<!-- WhatsApp Share Modal -->
+<!-- WhatsApp Share Modal -->
+<!-- Share Challenge Modal -->
+<!-- WhatsApp Share Modal -->
+<!-- WhatsApp Share Modal -->
+<div class="modal fade" id="shareChallengeModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create a Challenge</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <label>Enter Challenge Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="challengeName"
+            (input)="updateButtonState()"
+            placeholder="Enter your name for challenge"
+          />
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" (click)="createChallenge()" [disabled]="!challengeName">
+            Share on WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Button to Open Modal -->
+ 
+  
+  
